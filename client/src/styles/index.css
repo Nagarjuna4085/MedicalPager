@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  /* 🎨 Light mode colors */
+  --color-primary: #075e54; /* Header green */
+  --color-secondary: #25d366; /* Accent green */
+  --color-chat-bg: #ece5dd; /* Chat background */
+  --color-message-sent: #dcf8c6; /* Sent message */
+  --color-message-received: #ffffff; /* Received message */
+  --color-border: #d1d7db; /* Border */
+  --color-text-muted: #667781; /* Subtle text */
+
+  /* ✨ Animations */
+  --animate-fade-in: fade-in 0.6s ease-in-out;
+  --animate-slide-up: slide-up 0.4s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(15px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+/* 🌙 Dark mode overrides (outside @theme) */
+@layer base {
+  .dark {
+    --color-primary: #202c33;
+    --color-secondary: #00a884;
+    --color-chat-bg: #111b21;
+    --color-message-sent: #050706;
+    --color-message-received: #202c33;
+    --color-border: #2a3942;
+    --color-text-muted: #8696a0;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-[var(--color-chat-bg)] text-[var(--color-text-muted)] transition-colors duration-300 font-sans;
+  }
+
+  * {
+    @apply border-[var(--color-border)];
+  }
+}
+
+/* Custom utilities */
+@utility chat-container {
+  @apply flex h-screen bg-[var(--color-chat-bg)];
+}
+
+/* @utility chat-sidebar {
+  @apply hidden md:flex md:w-1/3 lg:w-1/4 border-r bg-white dark:bg-[var(--color-primary)];
+}
+
+@utility chat-window {
+  @apply flex flex-col flex-1 bg-[var(--color-chat-bg)];
+} */
+
+@utility message-sent {
+  @apply bg-[var(--color-message-sent)] text-black rounded-lg p-2 shadow;
+}
+
+@utility message-received {
+  @apply bg-[var(--color-message-received)] text-black rounded-lg p-2 shadow;
+}
+
+@utility send-button {
+  @apply bg-[var(--color-secondary)] text-white px-4 py-2 rounded-full hover:opacity-90 transition;
+}
