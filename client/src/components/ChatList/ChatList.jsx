@@ -1,5 +1,5 @@
 import { ListFilter, UserPlus, User } from "lucide-react";
-
+import profileImg from "../../assets/images/profile.jpg";
 const ChatList = ({ show = true }) => {
   // Dummy users
   const users = [
@@ -245,7 +245,12 @@ const ChatList = ({ show = true }) => {
             <div className="flex justify-center  items-center gap-2 min-w-0">
               {/* user photo */}
               <div className="mr-1 shrink-0">
-                <User />
+                {/* <User /> */}
+                <img
+                  src={profileImg}
+                  alt="Avatar"
+                  className="w-10 h-10 rounded-full object-cover sm:w-12 sm:h-12"
+                />
               </div>
               {/* username and latest message */}
               <div className="flex flex-col min-w-0">
