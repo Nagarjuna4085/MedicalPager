@@ -18,7 +18,7 @@ const ChatLayout = () => {
       <div className="flex w-full ">
         {/* users */}
         <div
-          className={` w-full sm:w-1/4  ${
+          className={` w-full sm:w-1/3  ${
             selectedUser ? "hidden  sm:block" : "block w-full sm:block "
           }`}
         >
