@@ -84,3 +84,7 @@
 @utility send-button {
   @apply bg-[var(--color-secondary)] text-white px-4 py-2 rounded-full hover:opacity-90 transition;
 }
+
+@utility hover-sidebar-icons {
+  @apply hover:opacity-20 hover:scale-105 transition-all duration-300 ease-in-out;
+}
