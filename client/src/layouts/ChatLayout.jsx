@@ -5,7 +5,7 @@ import ChatPage from "../pages/ChatPage";
 import Sidebar from "../Sidebar/Sidebar";
 
 const ChatLayout = () => {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(true);
 
   return (
     <div className="chat-container w-full">

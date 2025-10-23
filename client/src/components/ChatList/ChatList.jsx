@@ -221,7 +221,7 @@ const ChatList = ({ show = true }) => {
   return (
     <div className="flex flex-col  border border-border h-screen">
       {/* header */}
-      <div className="flex justify-between px-1 py-2 bg-primary text-secondary">
+      <div className="flex justify-between px-4 py-4 bg-primary text-secondary">
         <div className="font-bold">Chats</div>
         <div className="flex gap-3">
           <UserPlus />
