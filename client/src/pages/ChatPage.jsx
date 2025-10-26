@@ -10,6 +10,8 @@ import {
   Smile,
   Paperclip,
 } from "lucide-react";
+import VideoCall from "../components/Video/VideoCall";
+import AudioCall from "../components/Video/AudioCall";
 
 const ChatPage = () => {
   const bottomRef = useRef(null);
@@ -17,6 +19,15 @@ const ChatPage = () => {
   // ✅ State for messages
   const [messages, setMessages] = useState(initialMessages);
   const [newMessage, setNewMessage] = useState("");
+  const [isVideoCalling, setIsVideoCalling] = useState(false);
+  const [isAudioCalling, setIsAudioCalling] = useState(false);
+
+  const toggleVideoCall = () => {
+    setIsVideoCalling((prev) => !prev);
+  };
+  const toggleAudioCall = () => {
+    setIsAudioCalling((prev) => !prev);
+  };
 
   // Group messages by date (YYYY-MM-DD)
   const groupedMessages = {};
@@ -74,8 +85,8 @@ const ChatPage = () => {
         </div>
         <div className="flex gap-6 items-center mr-3">
           <div className="flex gap-4 border border-border">
-            <Video size={24} />
-            <PhoneOutgoing size={20} />
+            <Video size={24} onClick={toggleVideoCall} />
+            <PhoneOutgoing onClick={toggleAudioCall} size={20} />
           </div>
           <Search size={20} />
         </div>
@@ -130,6 +141,13 @@ const ChatPage = () => {
           <Mic onClick={handleSend} />
         </div>
       </div>
+
+      <VideoCall
+        isVideoCalling={isVideoCalling}
+        onEndCall={() => setIsVideoCalling(false)}
+      />
+
+      <AudioCall isCalling={isAudioCalling} onEndCall={()=> setIsAudioCalling(false)} />
     </div>
   );
 };
