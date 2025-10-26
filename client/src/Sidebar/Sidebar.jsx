@@ -10,6 +10,7 @@ import {
   CircleUserRound,
 } from "lucide-react";
 import SidebarToggle from "./SidebarToggle";
+import Profile from "../components/Profile/Profile";
 
 const Sidebar = () => {
   const iconsTop = [Menu, MessageCircleMore, PhoneCall, ChartPie];
@@ -18,6 +19,8 @@ const Sidebar = () => {
   const ToggleMenu = () => {
     setIsMenuOpen(() => !isMenuOpen);
   };
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   const handleIconClick = (id) => {
     switch (id) {
       case 0:
@@ -28,6 +31,25 @@ const Sidebar = () => {
         break;
       case 2:
         console.log("Chart clicked");
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleIconBottomClick = (id) => {
+    switch (id) {
+      case 0:
+        // ToggleMenu();
+        break;
+      case 1:
+        // alert("Calling...");
+        break;
+      case 2:
+        // console.log("Chart clicked");
+        break;
+      case 3: // CircleUserRound icon
+        setIsProfileOpen((prev) => !prev); // toggle profile
         break;
       default:
         break;
@@ -48,12 +70,14 @@ const Sidebar = () => {
       <div className="flex flex-col gap-6 ">
         {iconsBottom.map((Icon, key) => (
           <Icon
+            onClick={() => handleIconBottomClick(key)}
             key={key}
             className="size-6 hover-sidebar-icons cursor-pointer hover:text-secondary"
           />
         ))}
       </div>
       <SidebarToggle isMenuOpen={isMenuOpen} />
+      <Profile isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
     </div>
   );
 };
