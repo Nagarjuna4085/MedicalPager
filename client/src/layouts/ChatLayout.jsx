@@ -5,7 +5,8 @@ import ChatPage from "../pages/ChatPage";
 import Sidebar from "../Sidebar/Sidebar";
 
 const ChatLayout = () => {
-  const [selectedUser, setSelectedUser] = useState(true);
+  const [selectedUser, setSelectedUser] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   return (
     <div className="chat-container w-full">
@@ -22,7 +23,12 @@ const ChatLayout = () => {
             selectedUser ? "hidden  sm:block" : "block w-full sm:block "
           }`}
         >
-          <ChatList />
+          <ChatList
+            onSelectUser={(user) => {
+              setCurrentUser(user);
+              setSelectedUser(true);
+            }}
+          />
         </div>
         {/* chatwindow */}
         <div
@@ -30,7 +36,7 @@ const ChatLayout = () => {
             selectedUser ? "w-full block" : "hidden sm:block"
           } `}
         >
-          {selectedUser ? <ChatPage /> : <ChatWindow />}
+          {selectedUser ? <ChatPage user={currentUser} /> : <ChatWindow />}
         </div>
       </div>
     </div>

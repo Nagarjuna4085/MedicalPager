@@ -55,7 +55,7 @@ const Profile = ({ isOpen, onClose }) => {
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (
-            <div className="">
+            <div key={tab.id} className="">
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}

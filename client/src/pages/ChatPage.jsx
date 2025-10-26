@@ -13,7 +13,7 @@ import {
 import VideoCall from "../components/Video/VideoCall";
 import AudioCall from "../components/Video/AudioCall";
 
-const ChatPage = () => {
+const ChatPage = ({ user }) => {
   const bottomRef = useRef(null);
 
   // ✅ State for messages
@@ -79,7 +79,7 @@ const ChatPage = () => {
             alt="user icon"
           />
           <div className="flex flex-col">
-            <div className="text-Secondary font-bold">Alice</div>
+            <div className="text-Secondary font-bold">{user.name}</div>
             <div className="text-muted">last seen today at 5:00 am</div>
           </div>
         </div>
@@ -147,7 +147,10 @@ const ChatPage = () => {
         onEndCall={() => setIsVideoCalling(false)}
       />
 
-      <AudioCall isCalling={isAudioCalling} onEndCall={()=> setIsAudioCalling(false)} />
+      <AudioCall
+        isCalling={isAudioCalling}
+        onEndCall={() => setIsAudioCalling(false)}
+      />
     </div>
   );
 };

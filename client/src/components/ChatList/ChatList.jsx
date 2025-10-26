@@ -1,6 +1,6 @@
 import { ListFilter, UserPlus, User } from "lucide-react";
 import profileImg from "../../assets/images/profile.jpg";
-const ChatList = ({ show = true }) => {
+const ChatList = ({ show = true, onSelectUser }) => {
   // Dummy users
   const users = [
     {
@@ -239,6 +239,7 @@ const ChatList = ({ show = true }) => {
       <div className="flex-1 overflow-y-auto mt-3">
         {users.map((user) => (
           <div
+            onClick={() => onSelectUser(user)} // ✅ pass the function, don't call immediately
             key={user.name}
             className="flex justify-between p-2 border border-amber-50 rounded-lg cursor-pointer hover:bg-white transition-all duration-300 ease-in-out"
           >
