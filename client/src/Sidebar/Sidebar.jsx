@@ -12,7 +12,7 @@ import {
 import SidebarToggle from "./SidebarToggle";
 import Profile from "../components/Profile/Profile";
 
-const Sidebar = () => {
+const Sidebar = ({ onTabChange }) => {
   const iconsTop = [Menu, MessageCircleMore, PhoneCall, ChartPie];
   const iconsBottom = [Star, Archive, Settings, CircleUserRound];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,10 +27,13 @@ const Sidebar = () => {
         ToggleMenu();
         break;
       case 1:
-        alert("Calling...");
+        onTabChange("chats");
         break;
       case 2:
-        console.log("Chart clicked");
+        onTabChange("calls");
+        break;
+      case 3:
+        onTabChange("status");
         break;
       default:
         break;
