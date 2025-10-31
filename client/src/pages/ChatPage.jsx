@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import profileImg from "../assets/images/profile.jpg";
 import { messages as initialMessages } from "../data/messages";
+import EmojiPicker from "emoji-picker-react";
 
 import {
   Mic,
@@ -21,6 +22,8 @@ const ChatPage = ({ user }) => {
   const [newMessage, setNewMessage] = useState("");
   const [isVideoCalling, setIsVideoCalling] = useState(false);
   const [isAudioCalling, setIsAudioCalling] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiRef = useRef(null);
 
   const toggleVideoCall = () => {
     setIsVideoCalling((prev) => !prev);
@@ -42,6 +45,17 @@ const ChatPage = ({ user }) => {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Close emoji picker when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (emojiRef.current && !emojiRef.current.contains(event.target)) {
+        setShowEmojiPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Format date header
   const formatDate = (dateStr) => {
@@ -108,13 +122,26 @@ const ChatPage = ({ user }) => {
                 .map((msg, idx) => (
                   <div
                     key={idx}
-                    className={`p-2 rounded-lg ${
+                    className={`relative group p-2 rounded-lg ${
                       msg.sender === "Me"
                         ? "self-end bg-message-sent"
                         : "self-start bg-message-received"
                     }`}
                   >
                     {msg.text}
+
+                    {/* Reaction Picker (visible on hover) */}
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex gap-1 bg-gray-800 text-white px-2 py-1 rounded-full shadow-lg">
+                      {["😂", "❤️", "👍", "😮", "😢"].map((emoji, i) => (
+                        <span
+                          key={i}
+                          className="cursor-pointer hover:scale-125 transition-transform"
+                          onClick={() => console.log(`Reacted with ${emoji}`)}
+                        >
+                          {emoji}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 ))}
             </div>
@@ -123,11 +150,36 @@ const ChatPage = ({ user }) => {
       </div>
 
       {/* Footer */}
-      <div className="flex justify-between px-2 pb-2 ml-2 mr-2 gap-4 border border-amber-50">
-        <div className="flex items-center gap-4">
-          <Smile />
+      <div
+        className="flex justify-between px-2 pb-2 ml-2 mr-2 gap-4 border border-amber-50 relative"
+        ref={emojiRef}
+      >
+        <div className="flex items-center gap-4 relative">
+          <Smile
+            size={24}
+            onClick={() => setShowEmojiPicker((prev) => !prev)}
+            className="cursor-pointer"
+          />
+
+          {/* Emoji Picker Popover */}
+          {showEmojiPicker && (
+            <div
+              className="absolute bottom-12 left-40 -translate-x-1/2 z-50"
+              style={{ boxShadow: "0 0 10px rgba(0,0,0,0.3)" }}
+            >
+              <EmojiPicker
+                onEmojiClick={(emoji) => {
+                  setNewMessage((prev) => prev + emoji.emoji);
+                  setShowEmojiPicker(false);
+                }}
+                theme="dark"
+              />
+            </div>
+          )}
+
           <Paperclip />
         </div>
+
         <div className="flex-1 flex items-center">
           <input
             placeholder="Type a message"
@@ -137,6 +189,7 @@ const ChatPage = ({ user }) => {
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
           />
         </div>
+
         <div className="flex items-center">
           <Mic onClick={handleSend} />
         </div>
