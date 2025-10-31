@@ -122,7 +122,7 @@ const ChatPage = ({ user }) => {
                 .map((msg, idx) => (
                   <div
                     key={idx}
-                    className={`relative group p-2 rounded-lg ${
+                    className={`relative group p-2 max-w-1/2 max-sm:w-90  rounded-lg ${
                       msg.sender === "Me"
                         ? "self-end bg-message-sent"
                         : "self-start bg-message-received"
