@@ -1,0 +1,43 @@
+{
+  "name": "whatsapp-backend",
+  "version": "1.0.0",
+  "description": "Backend API for WhatsApp-like chat app using Node.js, Express, and MongoDB.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "jest --watch"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "whatsapp",
+    "chat",
+    "mongodb"
+  ],
+  "author": "Nagarjuna Sanam",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "socket.io": "^4.8.1",
+    "winston": "^3.18.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.0",
+    "eslint-config-prettier": "^10.1.8",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
+}
